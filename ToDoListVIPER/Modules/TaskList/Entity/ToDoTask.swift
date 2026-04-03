@@ -5,7 +5,7 @@ import Foundation
 struct ToDoTask {
     let id: Int
     var title: String
-    var desciption: String
+    var description: String
     var isCompleted: Bool
     let createdAt: Date
 }

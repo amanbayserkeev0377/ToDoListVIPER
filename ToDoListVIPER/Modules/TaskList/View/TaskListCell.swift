@@ -125,7 +125,7 @@ final class TaskListCell: UITableViewCell {
     
     func configure(with task: ToDoTask) {
         dateLabel.text = TaskListCell.dateFormatter.string(from: task.createdAt)
-        descriptionLabel.text = task.desciption
+        descriptionLabel.text = task.description
         configureCompletionState(isCompleted: task.isCompleted, title: task.title)
     }
     

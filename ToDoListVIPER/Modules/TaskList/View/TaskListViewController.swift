@@ -215,7 +215,7 @@ extension TaskListViewController: UITableViewDelegate {
                 title: "Поделиться",
                 image: UIImage(systemName: "square.and.arrow.up")
             ) { [weak self] _ in
-                let text = "\(task.title)\n\(task.desciption)"
+                let text = "\(task.title)\n\(task.description)"
                 let activityVC = UIActivityViewController(
                     activityItems: [text],
                     applicationActivities: nil
