@@ -26,6 +26,10 @@ extension TaskListPresenter: TaskListPresenterProtocol {
         router?.navigateToEditTask(task)
     }
     
+    func didToggleTask(_ task: ToDoTask) {
+        interactor?.toggleTask(task)
+    }
+    
     func didDeleteTask(_ task: ToDoTask) {
         interactor?.deleteTask(task)
     }

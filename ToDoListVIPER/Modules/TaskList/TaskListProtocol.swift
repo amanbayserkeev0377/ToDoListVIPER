@@ -11,8 +11,10 @@ protocol TaskListViewProtocol: AnyObject {
 // MARK: - Presenter
 protocol TaskListPresenterProtocol: AnyObject {
     func viewDidLoad()
+    
     func didTapAddTask()
     func didTapTask(_ task: ToDoTask)
+    func didToggleTask(_ task: ToDoTask)
     func didDeleteTask(_ task: ToDoTask)
     func didSearchTasks(with query: String)
 }
@@ -20,6 +22,7 @@ protocol TaskListPresenterProtocol: AnyObject {
 // MARK: - Interactor
 protocol TaskListInteractorProtocol: AnyObject {
     func fetchTasks()
+    func toggleTask(_ task: ToDoTask)
     func deleteTask(_ task: ToDoTask)
     func searchTasks(with query: String)
 }
