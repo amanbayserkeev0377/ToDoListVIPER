@@ -71,14 +71,19 @@ final class TaskListViewController: UIViewController {
         presenter?.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter?.viewDidLoad()
+    }
+    
     private func setupUI() {
         view.backgroundColor = .appBackground
         
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = Appearance.title
-        navigationController?.navigationBar.largeTitleTextAttributes = [
-            .foregroundColor: UIColor.appPrimary
-        ]
+//        navigationController?.navigationBar.largeTitleTextAttributes = [
+//            .foregroundColor: UIColor.appPrimary
+//        ]
         
         view.addSubview(tableView)
         view.addSubview(bottomBarView)

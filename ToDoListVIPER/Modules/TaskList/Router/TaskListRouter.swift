@@ -10,12 +10,12 @@ final class TaskListRouter {
 extension TaskListRouter: TaskListRouterProtocol {
     
     func navigateToAddTask() {
-        // TODO: navigate to TaskDetail screen (add mode)
-        print("Navigate to add task")
+        let detailVC = TaskDetailAssembly.build(mode: .add)
+        viewController?.navigationController?.pushViewController(detailVC, animated: true)
     }
     
     func navigateToEditTask(_ task: ToDoTask) {
-        // TODO: nav to taskdetail
-        print("Navigate to edit task: \(task.id)")
+        let detailVC = TaskDetailAssembly.build(mode: .edit(task))
+        viewController?.navigationController?.pushViewController(detailVC, animated: true)
     }
 }
