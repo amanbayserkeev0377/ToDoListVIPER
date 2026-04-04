@@ -11,26 +11,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let rootViewController = TaskListAssembly.build()
         
-        let navigationController = UINavigationController(
-            rootViewController: rootViewController
-        )
+        let navigationController = UINavigationController(rootViewController: rootViewController)
         
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = navigationController
         window?.overrideUserInterfaceStyle = .dark
+        window?.tintColor = .appTint
         window?.makeKeyAndVisible()
     }
-
-    func sceneDidEnterBackground(_ scene: UIScene) {
-        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
-    }
-
-
 }
 

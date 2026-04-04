@@ -1,22 +1,15 @@
 import Foundation
 
-struct TodoResponseDTO: Decodable {
+struct TodoResponseDTO: Decodable, Sendable {
     let todos: [TodoDTO]
     let total: Int
 }
 
-struct TodoDTO: Decodable {
+struct TodoDTO: Decodable, Sendable {
     let id: Int
     let todo: String // API calls it "todo", app call it "title"
     let completed: Bool
     let userId: Int
-    
-    enum CodingKeys: String, CodingKey {
-        case id
-        case todo
-        case completed
-        case userId
-    }
     
     func toDomain() -> ToDoTask {
         return ToDoTask(
