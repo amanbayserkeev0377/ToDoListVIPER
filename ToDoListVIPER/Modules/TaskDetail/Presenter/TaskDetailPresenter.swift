@@ -4,7 +4,6 @@ final class TaskDetailPresenter {
     
     weak var view: TaskDetailViewProtocol?
     var interactor: TaskDetailInteractorProtocol?
-    var router: TaskDetailRouterProtocol?
     
     private let mode: TaskDetailMode
     
@@ -42,15 +41,9 @@ extension TaskDetailPresenter: TaskDetailPresenterProtocol {
 
 extension TaskDetailPresenter: TaskDetailInteractorOutputProtocol {
     
-    func didSaveSuccessfully() {
-        DispatchQueue.main.async { [weak self] in
-            self?.router?.dismiss()
-        }
-    }
-    
     func didFailWithError(_ error: any Error) {
         DispatchQueue.main.async { [weak self] in
-            self?.router?.dismiss()
+            self?.view?.showError(error.localizedDescription)
         }
     }
 }

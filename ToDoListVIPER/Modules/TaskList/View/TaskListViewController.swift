@@ -73,7 +73,10 @@ final class TaskListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presenter?.viewDidLoad()
+        // Small delay to let CoreData finish saving
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+            self?.presenter?.viewDidLoad()
+        }
     }
     
     private func setupUI() {
@@ -81,9 +84,9 @@ final class TaskListViewController: UIViewController {
         
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = Appearance.title
-//        navigationController?.navigationBar.largeTitleTextAttributes = [
-//            .foregroundColor: UIColor.appPrimary
-//        ]
+        navigationController?.navigationBar.largeTitleTextAttributes = [
+            .foregroundColor: UIColor.appPrimary
+        ]
         
         view.addSubview(tableView)
         view.addSubview(bottomBarView)
@@ -186,9 +189,7 @@ extension TaskListViewController: UITableViewDataSource {
         
         cell.onCheckboxTapped = { [weak self] in
             guard let self else { return }
-            var updatedTask = task
-            updatedTask.isCompleted.toggle()
-            self.presenter?.didToggleTask(updatedTask)
+            self.presenter?.didToggleTask(task)
         }
         
         return cell

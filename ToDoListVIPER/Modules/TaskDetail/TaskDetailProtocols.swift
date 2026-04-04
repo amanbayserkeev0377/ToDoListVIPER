@@ -25,11 +25,5 @@ protocol TaskDetailInteractorProtocol: AnyObject {
 
 // MARK: - Interactor Output
 protocol TaskDetailInteractorOutputProtocol: AnyObject {
-    func didSaveSuccessfully()
     func didFailWithError(_ error: Error)
-}
-
-// MARK: - Router
-protocol TaskDetailRouterProtocol: AnyObject {
-    func dismiss()
 }

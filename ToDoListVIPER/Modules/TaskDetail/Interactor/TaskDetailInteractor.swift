@@ -27,8 +27,6 @@ extension TaskDetailInteractor: TaskDetailInteractorProtocol {
             guard let self else { return }
             if let error {
                 self.output?.didFailWithError(error)
-            } else {
-                self.output?.didSaveSuccessfully()
             }
         }
     }
@@ -42,8 +40,6 @@ extension TaskDetailInteractor: TaskDetailInteractorProtocol {
             guard let self else { return }
             if let error {
                 self.output?.didFailWithError(error)
-            } else {
-                self.output?.didSaveSuccessfully()
             }
         }
     }

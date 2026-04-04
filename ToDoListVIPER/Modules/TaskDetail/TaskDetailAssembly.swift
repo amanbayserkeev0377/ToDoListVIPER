@@ -12,7 +12,6 @@ final class TaskDetailAssembly {
         
         presenter.view = view
         presenter.interactor = interactor
-        presenter.router = router
         
         interactor.output = presenter
         
