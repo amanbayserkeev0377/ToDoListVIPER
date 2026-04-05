@@ -6,7 +6,18 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		E78F3E0C2F822D1400D8EB01 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E7FA21C22F7FAE5500D2CC96 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E7FA21C92F7FAE5500D2CC96;
+			remoteInfo = ToDoListVIPER;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		E78F3E082F822D1400D8EB01 /* ToDoListVIPERTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoListVIPERTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7FA21CA2F7FAE5500D2CC96 /* ToDoListVIPER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoListVIPER.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -21,6 +32,11 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		E78F3E092F822D1400D8EB01 /* ToDoListVIPERTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ToDoListVIPERTests;
+			sourceTree = "<group>";
+		};
 		E7FA21CC2F7FAE5500D2CC96 /* ToDoListVIPER */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -32,6 +48,13 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		E78F3E052F822D1400D8EB01 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E7FA21C72F7FAE5500D2CC96 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -46,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				E7FA21CC2F7FAE5500D2CC96 /* ToDoListVIPER */,
+				E78F3E092F822D1400D8EB01 /* ToDoListVIPERTests */,
 				E7FA21CB2F7FAE5500D2CC96 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				E7FA21CA2F7FAE5500D2CC96 /* ToDoListVIPER.app */,
+				E78F3E082F822D1400D8EB01 /* ToDoListVIPERTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -61,6 +86,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		E78F3E072F822D1400D8EB01 /* ToDoListVIPERTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E78F3E0E2F822D1400D8EB01 /* Build configuration list for PBXNativeTarget "ToDoListVIPERTests" */;
+			buildPhases = (
+				E78F3E042F822D1400D8EB01 /* Sources */,
+				E78F3E052F822D1400D8EB01 /* Frameworks */,
+				E78F3E062F822D1400D8EB01 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E78F3E0D2F822D1400D8EB01 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				E78F3E092F822D1400D8EB01 /* ToDoListVIPERTests */,
+			);
+			name = ToDoListVIPERTests;
+			packageProductDependencies = (
+			);
+			productName = ToDoListVIPERTests;
+			productReference = E78F3E082F822D1400D8EB01 /* ToDoListVIPERTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		E7FA21C92F7FAE5500D2CC96 /* ToDoListVIPER */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E7FA21E02F7FAE5600D2CC96 /* Build configuration list for PBXNativeTarget "ToDoListVIPER" */;
@@ -93,6 +141,10 @@
 				LastSwiftUpdateCheck = 2640;
 				LastUpgradeCheck = 2640;
 				TargetAttributes = {
+					E78F3E072F822D1400D8EB01 = {
+						CreatedOnToolsVersion = 26.4;
+						TestTargetID = E7FA21C92F7FAE5500D2CC96;
+					};
 					E7FA21C92F7FAE5500D2CC96 = {
 						CreatedOnToolsVersion = 26.4;
 					};
@@ -113,11 +165,19 @@
 			projectRoot = "";
 			targets = (
 				E7FA21C92F7FAE5500D2CC96 /* ToDoListVIPER */,
+				E78F3E072F822D1400D8EB01 /* ToDoListVIPERTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		E78F3E062F822D1400D8EB01 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E7FA21C82F7FAE5500D2CC96 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -128,6 +188,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		E78F3E042F822D1400D8EB01 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E7FA21C62F7FAE5500D2CC96 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -137,7 +204,57 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		E78F3E0D2F822D1400D8EB01 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E7FA21C92F7FAE5500D2CC96 /* ToDoListVIPER */;
+			targetProxy = E78F3E0C2F822D1400D8EB01 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		E78F3E0F2F822D1400D8EB01 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SXCBCPV7Y9;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amanbayserkeev.ToDoListVIPERTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ToDoListVIPER.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ToDoListVIPER";
+			};
+			name = Debug;
+		};
+		E78F3E102F822D1400D8EB01 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SXCBCPV7Y9;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amanbayserkeev.ToDoListVIPERTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ToDoListVIPER.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ToDoListVIPER";
+			};
+			name = Release;
+		};
 		E7FA21E12F7FAE5600D2CC96 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -332,6 +449,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		E78F3E0E2F822D1400D8EB01 /* Build configuration list for PBXNativeTarget "ToDoListVIPERTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E78F3E0F2F822D1400D8EB01 /* Debug */,
+				E78F3E102F822D1400D8EB01 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E7FA21C52F7FAE5500D2CC96 /* Build configuration list for PBXProject "ToDoListVIPER" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
