@@ -4,6 +4,7 @@ final class TaskDetailPresenter {
     
     weak var view: TaskDetailViewProtocol?
     var interactor: TaskDetailInteractorProtocol?
+    var router: TaskDetailRouterProtocol?
     
     private let mode: TaskDetailMode
     

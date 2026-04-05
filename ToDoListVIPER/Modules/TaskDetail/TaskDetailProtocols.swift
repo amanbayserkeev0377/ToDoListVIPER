@@ -11,12 +11,6 @@ protocol TaskDetailViewProtocol: AnyObject {
     func showError(_ message: String)
 }
 
-// MARK: - Presenter
-protocol TaskDetailPresenterProtocol: AnyObject {
-    func viewDidLoad()
-    func didSaveTask(title: String, description: String)
-}
-
 // MARK: - Interactor
 protocol TaskDetailInteractorProtocol: AnyObject {
     func createTask(title: String, description: String)
@@ -27,3 +21,12 @@ protocol TaskDetailInteractorProtocol: AnyObject {
 protocol TaskDetailInteractorOutputProtocol: AnyObject {
     func didFailWithError(_ error: Error)
 }
+
+// MARK: - Presenter
+protocol TaskDetailPresenterProtocol: AnyObject {
+    func viewDidLoad()
+    func didSaveTask(title: String, description: String)
+}
+
+// MARK: - Router
+protocol TaskDetailRouterProtocol: AnyObject {}
