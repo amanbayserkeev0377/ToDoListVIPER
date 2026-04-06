@@ -15,7 +15,7 @@ final class TaskListCell: UITableViewCell {
         static let verticalPadding: CGFloat = 12
         static let checkboxPointSize: CGFloat = 24
         static let titleFontSize: CGFloat = 16
-        static let subtitleFontSize: CGFloat = 16
+        static let subtitleFontSize: CGFloat = 12
         static let stackSpacing: CGFloat = 4
         static let dateFormat = "dd/MM/yy"
     }

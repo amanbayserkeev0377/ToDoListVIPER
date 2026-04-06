@@ -36,7 +36,7 @@ final class TaskListViewController: UIViewController {
     
     private let bottomBarView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(white: 0.1, alpha: 1)
+        view.backgroundColor = .appSecondaryBackground
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -68,7 +68,6 @@ final class TaskListViewController: UIViewController {
         setupTableView()
         setupSearchController()
         setupActions()
-        presenter?.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {

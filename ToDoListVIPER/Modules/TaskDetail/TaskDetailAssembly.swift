@@ -3,6 +3,7 @@ import UIKit
 final class TaskDetailAssembly {
     
     static func build(mode: TaskDetailMode) -> UIViewController {
+        
         let view = TaskDetailViewController()
         let presenter = TaskDetailPresenter(mode: mode)
         let interactor = TaskDetailInteractor()
@@ -12,6 +13,7 @@ final class TaskDetailAssembly {
         
         presenter.view = view
         presenter.interactor = interactor
+        presenter.router = router
         
         interactor.output = presenter
         
