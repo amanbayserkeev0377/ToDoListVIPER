@@ -30,6 +30,14 @@ The application is built using the **VIPER** architecture pattern:
 - Load tasks from [DummyJSON API](https://dummyjson.com/todos) on first launch
 - Persist data in CoreData across app launches
 
+## Screenshots
+
+<p align="left">
+  <img src="Screenshots/screen1.png" width="220">
+  <img src="Screenshots/screen2.png" width="220">
+  <img src="Screenshots/screen3.png" width="220">
+</p>
+
 ## Project Structure
 ```
 ToDoListVIPER/
