@@ -33,93 +33,74 @@ final class TaskListPresenterTests: XCTestCase {
     // MARK: - Lifecycle Tests
     
     func test_viewDidLoad_callsFetchTasks() {
-        // Act
         presenter.viewDidLoad()
         
-        // Assert
-        XCTAssertTrue(mockInteractor.fetchTasksCalled, "Presenter should trigger fetchTasks on interactor upon loading")
+        XCTAssertTrue(mockInteractor.fetchTasksCalled, "viewDidLoad should call interactor.fetchTasks()")
     }
     
     // MARK: - Interactor Output Tests
     
     func test_didFetchTasks_showTasksInView() {
-        // Arrange
         let tasks = [ToDoTask(id: 1, title: "Test Task", description: "", isCompleted: false, createdAt: Date())]
-        let expectation = expectation(description: "Wait for main thread dispatch")
+        let expectation = expectation(description: "showTasks called on main thread")
         
-        // Act
         presenter.didFetchTasks(tasks)
         
-        // Assert
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             expectation.fulfill()
         }
         waitForExpectations(timeout: 1.0)
         
-        XCTAssertTrue(mockView.showTasksCalled, "View should be requested to display tasks")
-        XCTAssertEqual(mockView.receivedTasks.count, 1, "View should receive the exact number of tasks")
+        XCTAssertTrue(mockView.showTasksCalled, "didFetchTasks should call view.showTasks()")
+        XCTAssertEqual(mockView.receivedTasks.count, 1, "View should receive 1 task")
     }
     
     func test_didFailWithError_showsErrorInView() {
-        // Arrange
         let error = NSError(domain: "test", code: 0, userInfo: [NSLocalizedDescriptionKey: "Network Error"])
-        let expectation = expectation(description: "Wait for main thread dispatch")
+        let expectation = expectation(description: "showError called on main thread")
         
-        // Act
         presenter.didFailWithError(error)
         
-        // Assert
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             expectation.fulfill()
         }
         waitForExpectations(timeout: 1.0)
         
-        XCTAssertTrue(mockView.showErrorCalled, "View should display an error message when data fetching fails")
+        XCTAssertTrue(mockView.showErrorCalled, "didFailWithError should call view.showError()")
     }
     
     // MARK: - User Action Tests
     
     func test_didTapAddTask_navigatesToAddTask() {
-        // Act
         presenter.didTapAddTask()
         
-        // Assert
-        XCTAssertTrue(mockRouter.navigateToAddTaskCalled, "Presenter should request router to navigate to Add Task screen")
+        XCTAssertTrue(mockRouter.navigateToAddTaskCalled, "didTapAddTask should call router.navigateToAddTask()")
     }
     
     func test_didTapTask_navigatesToEditTask() {
-        // Arrange
         let task = ToDoTask(id: 1, title: "Edit Task", description: "", isCompleted: false, createdAt: Date())
         
-        // Act
         presenter.didTapTask(task)
         
-        // Assert
-        XCTAssertTrue(mockRouter.navigateToEditTaskCalled, "Presenter should request router to navigate to task details")
-        XCTAssertEqual(mockRouter.receivedTask?.id, task.id, "Router should receive the correct task to edit")
+        XCTAssertTrue(mockRouter.navigateToEditTaskCalled, "didTapTask should call router.navigateToEditTask()")
+        XCTAssertEqual(mockRouter.receivedTask?.id, task.id, "Router should receive correct task")
     }
     
     func test_didDeleteTask_callsInteractor() {
-        // Arrange
         let task = ToDoTask(id: 1, title: "Delete Task", description: "", isCompleted: false, createdAt: Date())
         
-        // Act
         presenter.didDeleteTask(task)
         
-        // Assert
-        XCTAssertTrue(mockInteractor.deleteTaskCalled, "Presenter should notify interactor to perform deletion")
+        XCTAssertTrue(mockInteractor.deleteTaskCalled, "didDeleteTask should call interactor.deleteTask()")
         XCTAssertEqual(mockInteractor.receivedTask?.id, task.id, "Interactor should receive the correct task for deletion")
     }
     
     func test_didSearchTasks_passesQueryToInteractor() {
-        // Arrange
         let query = "Buy milk"
         
-        // Act
         presenter.didSearchTasks(with: query)
         
-        // Assert
-        XCTAssertTrue(mockInteractor.searchTasksCalled, "Presenter should pass the search query to the interactor")
+        XCTAssertTrue(mockInteractor.searchTasksCalled, "didSearchTasks should call interactor.searchTasks()")
         XCTAssertEqual(mockInteractor.receivedQuery, query, "Interactor should receive the exact search string")
     }
 }
