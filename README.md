@@ -33,9 +33,9 @@ The application is built using the **VIPER** architecture pattern:
 ## Screenshots
 
 <p align="left">
-  <img src="Screenshots/screen1.png" width="220">
-  <img src="Screenshots/screen2.png" width="220">
-  <img src="Screenshots/screen3.png" width="220">
+  <img src="Screenshots/screen1.PNG" width="220">
+  <img src="Screenshots/screen2.PNG" width="220">
+  <img src="Screenshots/screen3.PNG" width="220">
 </p>
 
 ## Project Structure
