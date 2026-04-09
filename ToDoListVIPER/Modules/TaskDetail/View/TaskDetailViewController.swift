@@ -2,17 +2,11 @@ import UIKit
 
 final class TaskDetailViewController: UIViewController {
     
-    private enum Appearance {
-        static let titlePlaceHolder = "Новая задача"
+    // MARK: - Constants
+    
+    private enum Constants {
+        static let titlePlaceholder = "Новая задача"
         static let descriptionPlaceholder = "Описание"
-        static let dateFormat = "dd/MM/yy"
-        
-        static let titleFontSize: CGFloat = 34
-        static let descriptionFontSize: CGFloat = 16
-        static let dateFontSize: CGFloat = 12
-        static let sidePadding: CGFloat = 16
-        static let topPadding: CGFloat = 8
-        static let spacing: CGFloat = 16
     }
     
     // MARK: - Properties
@@ -23,9 +17,9 @@ final class TaskDetailViewController: UIViewController {
     
     private let titleTextView: UITextView = {
         let textView = UITextView()
-        textView.font = .systemFont(ofSize: Appearance.titleFontSize, weight: .bold)
+        textView.font = .systemFont(ofSize: DesignSystem.FontSize.title, weight: .bold)
         textView.textColor = .appSecondary
-        textView.text = Appearance.titlePlaceHolder
+        textView.text = Constants.titlePlaceholder
         textView.backgroundColor = .clear
         textView.isScrollEnabled = false
         textView.textContainerInset = .zero
@@ -36,7 +30,7 @@ final class TaskDetailViewController: UIViewController {
     
     private let dateLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: Appearance.dateFontSize)
+        label.font = .systemFont(ofSize: DesignSystem.FontSize.small)
         label.textColor = .appSecondary
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -44,9 +38,9 @@ final class TaskDetailViewController: UIViewController {
     
     private let descriptionTextView: UITextView = {
         let textView = UITextView()
-        textView.font = .systemFont(ofSize: Appearance.descriptionFontSize)
+        textView.font = .systemFont(ofSize: DesignSystem.FontSize.body)
         textView.textColor = .appSecondary
-        textView.text = Appearance.descriptionPlaceholder
+        textView.text = Constants.descriptionPlaceholder
         textView.backgroundColor = .clear
         textView.isScrollEnabled = false
         textView.textContainerInset = .zero
@@ -59,7 +53,7 @@ final class TaskDetailViewController: UIViewController {
     
     private static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = Appearance.dateFormat
+        formatter.dateFormat = DesignSystem.DateFormat.display
         return formatter
     }()
     
@@ -79,10 +73,8 @@ final class TaskDetailViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
         let title = titleTextView.textColor == .appPrimary ? titleTextView.text ?? "" : ""
         let description = descriptionTextView.textColor == .appPrimary ? descriptionTextView.text ?? "" : ""
-        
         presenter?.didSaveTask(title: title, description: description)
     }
     
@@ -91,26 +83,23 @@ final class TaskDetailViewController: UIViewController {
     private func setupUI() {
         view.backgroundColor = .appBackground
         navigationItem.largeTitleDisplayMode = .never
-        
         setupKeyboardToolbar()
-        
         titleTextView.delegate = self
         descriptionTextView.delegate = self
-        
         view.addSubview(titleTextView)
         view.addSubview(dateLabel)
         view.addSubview(descriptionTextView)
-        
         setupConstraints()
     }
     
     private func setupKeyboardToolbar() {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
+        toolbar.barStyle = .black
         
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let hideButton = UIBarButtonItem(
-            image: UIImage(systemName: "keyboard.chevron.compact.down"),
+            image: UIImage(systemName: DesignSystem.Icon.hideKeyboard),
             style: .plain,
             target: self,
             action: #selector(hideKeyboard)
@@ -124,16 +113,16 @@ final class TaskDetailViewController: UIViewController {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            titleTextView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Appearance.topPadding),
-            titleTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Appearance.sidePadding),
-            titleTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Appearance.sidePadding),
+            titleTextView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: DesignSystem.Spacing.small),
+            titleTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: DesignSystem.Spacing.medium),
+            titleTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -DesignSystem.Spacing.medium),
             
-            dateLabel.topAnchor.constraint(equalTo: titleTextView.bottomAnchor, constant: 8),
-            dateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Appearance.sidePadding),
+            dateLabel.topAnchor.constraint(equalTo: titleTextView.bottomAnchor, constant: DesignSystem.Spacing.small),
+            dateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: DesignSystem.Spacing.medium),
             
-            descriptionTextView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: Appearance.spacing),
-            descriptionTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Appearance.sidePadding),
-            descriptionTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Appearance.sidePadding),
+            descriptionTextView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: DesignSystem.Spacing.medium),
+            descriptionTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: DesignSystem.Spacing.medium),
+            descriptionTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -DesignSystem.Spacing.medium),
             descriptionTextView.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
@@ -152,10 +141,8 @@ extension TaskDetailViewController: TaskDetailViewProtocol {
     func showTask(_ task: ToDoTask) {
         titleTextView.text = task.title
         titleTextView.textColor = .appPrimary
-        
-        descriptionTextView.text = task.description.isEmpty ? Appearance.descriptionPlaceholder : task.description
+        descriptionTextView.text = task.description.isEmpty ? Constants.descriptionPlaceholder : task.description
         descriptionTextView.textColor = task.description.isEmpty ? .appSecondary : .appPrimary
-        
         dateLabel.text = TaskDetailViewController.dateFormatter.string(from: task.createdAt)
     }
     
@@ -179,11 +166,7 @@ extension TaskDetailViewController: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
-            if textView == titleTextView {
-                textView.text = Appearance.titlePlaceHolder
-            } else {
-                textView.text = Appearance.descriptionPlaceholder
-            }
+            textView.text = textView == titleTextView ? Constants.titlePlaceholder : Constants.descriptionPlaceholder
             textView.textColor = .appSecondary
         }
     }

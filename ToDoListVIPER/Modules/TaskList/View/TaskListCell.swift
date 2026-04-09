@@ -6,26 +6,12 @@ final class TaskListCell: UITableViewCell {
     
     var onCheckboxTapped: (() -> Void)?
     
-    // MARK: - Appearance
-    
-    private enum Appearance {
-        static let sidePadding: CGFloat = 16
-        static let interElementSpacing: CGFloat = 12
-        static let checkboxSize: CGFloat = 24
-        static let verticalPadding: CGFloat = 12
-        static let checkboxPointSize: CGFloat = 24
-        static let titleFontSize: CGFloat = 16
-        static let subtitleFontSize: CGFloat = 12
-        static let stackSpacing: CGFloat = 4
-        static let dateFormat = "dd/MM/yy"
-    }
-    
     // MARK: - UI Elements
     
     private let checkboxButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        let config = UIImage.SymbolConfiguration(pointSize: Appearance.checkboxPointSize)
+        let config = UIImage.SymbolConfiguration(pointSize: DesignSystem.Layout.checkboxSize)
         let image = UIImage(systemName: "circle", withConfiguration: config)
         button.setImage(image, for: .normal)
         button.tintColor = .appSecondary
@@ -34,7 +20,7 @@ final class TaskListCell: UITableViewCell {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: Appearance.titleFontSize, weight: .medium)
+        label.font = .systemFont(ofSize: DesignSystem.FontSize.body, weight: .medium)
         label.textColor = .appPrimary
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -42,7 +28,7 @@ final class TaskListCell: UITableViewCell {
     
     private let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: Appearance.subtitleFontSize)
+        label.font = .systemFont(ofSize: DesignSystem.FontSize.small)
         label.textColor = .appSecondary
         label.numberOfLines = 2
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -51,7 +37,7 @@ final class TaskListCell: UITableViewCell {
     
     private let dateLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: Appearance.subtitleFontSize)
+        label.font = .systemFont(ofSize: DesignSystem.FontSize.small)
         label.textColor = .appSecondary
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -60,7 +46,7 @@ final class TaskListCell: UITableViewCell {
     private let textStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
-        stack.spacing = Appearance.stackSpacing
+        stack.spacing = DesignSystem.Layout.stackSpacing
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -69,7 +55,7 @@ final class TaskListCell: UITableViewCell {
     
     private static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = Appearance.dateFormat
+        formatter.dateFormat = DesignSystem.DateFormat.display
         return formatter
     }()
     
@@ -83,6 +69,25 @@ final class TaskListCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Reuse
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        onCheckboxTapped = nil
+        
+        titleLabel.attributedText = nil
+        titleLabel.text = nil
+        titleLabel.textColor = .appPrimary
+        descriptionLabel.text = nil
+        dateLabel.text = nil
+        
+        let config = UIImage.SymbolConfiguration(pointSize: DesignSystem.Layout.checkboxSize)
+        let image = UIImage(systemName: "circle", withConfiguration: config)
+        checkboxButton.setImage(image, for: .normal)
+        checkboxButton.tintColor = .appSecondary
     }
     
     // MARK: - Actions
@@ -109,15 +114,15 @@ final class TaskListCell: UITableViewCell {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            checkboxButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Appearance.sidePadding),
+            checkboxButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: DesignSystem.Spacing.medium),
             checkboxButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            checkboxButton.widthAnchor.constraint(equalToConstant: Appearance.checkboxSize),
-            checkboxButton.heightAnchor.constraint(equalToConstant: Appearance.checkboxSize),
+            checkboxButton.widthAnchor.constraint(equalToConstant: DesignSystem.Layout.checkboxSize),
+            checkboxButton.heightAnchor.constraint(equalToConstant: DesignSystem.Layout.checkboxSize),
             
-            textStackView.leadingAnchor.constraint(equalTo: checkboxButton.trailingAnchor, constant: Appearance.interElementSpacing),
-            textStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Appearance.sidePadding),
-            textStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Appearance.verticalPadding),
-            textStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Appearance.verticalPadding)
+            textStackView.leadingAnchor.constraint(equalTo: checkboxButton.trailingAnchor, constant: DesignSystem.Layout.cellElementSpacing),
+            textStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -DesignSystem.Spacing.medium),
+            textStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: DesignSystem.Layout.cellVerticalPadding),
+            textStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -DesignSystem.Layout.cellVerticalPadding)
         ])
     }
     

@@ -2,14 +2,11 @@ import UIKit
 
 final class TaskListViewController: UIViewController {
     
-    // MARK: - Appearance
+    // MARK: - Constants
     
-    private enum Appearance {
+    private enum Constants {
         static let title = "Задачи"
         static let searchPlaceholder = "Поиск"
-        static let addButtonIcon = "square.and.pencil"
-        static let tableRowHeight: CGFloat = 80
-        static let taskCountFont: CGFloat = 11
     }
     
     // MARK: - Properties
@@ -29,7 +26,7 @@ final class TaskListViewController: UIViewController {
     
     private let searchController: UISearchController = {
         let search = UISearchController(searchResultsController: nil)
-        search.searchBar.placeholder = Appearance.searchPlaceholder
+        search.searchBar.placeholder = Constants.searchPlaceholder
         search.obscuresBackgroundDuringPresentation = false
         return search
     }()
@@ -44,7 +41,7 @@ final class TaskListViewController: UIViewController {
     private let taskCountLabel: UILabel = {
         let label = UILabel()
         label.textColor = .appPrimary
-        label.font = .systemFont(ofSize: Appearance.taskCountFont)
+        label.font = .systemFont(ofSize: DesignSystem.FontSize.caption)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -52,15 +49,15 @@ final class TaskListViewController: UIViewController {
     
     private let addButton: UIButton = {
         let button = UIButton()
-        let config = UIImage.SymbolConfiguration(pointSize: 24)
-        let image = UIImage(systemName: Appearance.addButtonIcon, withConfiguration: config)
+        let config = UIImage.SymbolConfiguration(pointSize: DesignSystem.Layout.checkboxSize)
+        let image = UIImage(systemName: DesignSystem.Icon.addTask, withConfiguration: config)
         button.setImage(image, for: .normal)
         button.tintColor = .appTint
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    // MARK: = Lifecycle
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,21 +65,15 @@ final class TaskListViewController: UIViewController {
         setupTableView()
         setupSearchController()
         setupActions()
+        presenter?.viewDidLoad()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        // Small delay to let CoreData finish saving
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
-            self?.presenter?.viewDidLoad()
-        }
-    }
+    // MARK: - Setup
     
     private func setupUI() {
         view.backgroundColor = .appBackground
-        
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.title = Appearance.title
+        navigationItem.title = Constants.title
         navigationController?.navigationBar.largeTitleTextAttributes = [
             .foregroundColor: UIColor.appPrimary
         ]
@@ -105,13 +96,13 @@ final class TaskListViewController: UIViewController {
             bottomBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             bottomBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             bottomBarView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            bottomBarView.heightAnchor.constraint(equalToConstant: 83),
+            bottomBarView.heightAnchor.constraint(equalToConstant: DesignSystem.Layout.bottomBarHeight),
             
             taskCountLabel.centerXAnchor.constraint(equalTo: bottomBarView.centerXAnchor),
-            taskCountLabel.topAnchor.constraint(equalTo: bottomBarView.topAnchor, constant: 16),
+            taskCountLabel.topAnchor.constraint(equalTo: bottomBarView.topAnchor, constant: DesignSystem.Spacing.medium),
             
-            addButton.trailingAnchor.constraint(equalTo: bottomBarView.trailingAnchor, constant: -16),
-            addButton.topAnchor.constraint(equalTo: bottomBarView.topAnchor, constant: 8)
+            addButton.trailingAnchor.constraint(equalTo: bottomBarView.trailingAnchor, constant: -DesignSystem.Spacing.medium),
+            addButton.topAnchor.constraint(equalTo: bottomBarView.topAnchor, constant: DesignSystem.Spacing.small)
         ])
     }
     
@@ -120,7 +111,7 @@ final class TaskListViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(TaskListCell.self, forCellReuseIdentifier: TaskListCell.identifier)
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = Appearance.tableRowHeight
+        tableView.estimatedRowHeight = DesignSystem.Layout.tableRowHeight
     }
     
     private func setupSearchController() {
@@ -157,11 +148,7 @@ extension TaskListViewController: TaskListViewProtocol {
     }
     
     func showError(_ message: String) {
-        let alert = UIAlertController(
-            title: "Ошибка",
-            message: message,
-            preferredStyle: .alert
-        )
+        let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
     }
@@ -203,7 +190,6 @@ extension TaskListViewController: UITableViewDelegate {
         presenter?.didTapTask(tasks[indexPath.row])
     }
     
-    // Context menu
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         let task = tasks[indexPath.row]
         
@@ -211,26 +197,23 @@ extension TaskListViewController: UITableViewDelegate {
             
             let editAction = UIAction(
                 title: "Редактировать",
-                image: UIImage(systemName: "pencil")
+                image: UIImage(systemName: DesignSystem.Icon.edit)
             ) { [weak self] _ in
                 self?.presenter?.didTapTask(task)
             }
             
             let shareAction = UIAction(
                 title: "Поделиться",
-                image: UIImage(systemName: "square.and.arrow.up")
+                image: UIImage(systemName: DesignSystem.Icon.share)
             ) { [weak self] _ in
                 let text = "\(task.title)\n\(task.description)"
-                let activityVC = UIActivityViewController(
-                    activityItems: [text],
-                    applicationActivities: nil
-                )
+                let activityVC = UIActivityViewController(activityItems: [text], applicationActivities: nil)
                 self?.present(activityVC, animated: true)
             }
             
             let deleteAction = UIAction(
                 title: "Удалить",
-                image: UIImage(systemName: "trash"),
+                image: UIImage(systemName: DesignSystem.Icon.trash),
                 attributes: .destructive
             ) { [weak self] _ in
                 self?.presenter?.didDeleteTask(task)
@@ -247,6 +230,7 @@ extension TaskListViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
         let query = searchController.searchBar.text ?? ""
+        guard query.isEmpty || query.count >= 2 else { return }
         presenter?.didSearchTasks(with: query)
     }
 }

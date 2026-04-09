@@ -5,7 +5,6 @@ final class TaskListInteractor {
     // MARK: - Properties
     
     weak var output: TaskListInteractorOutputProtocol?
-    
     private let coreDataService: CoreDataService
     private let networkService: NetworkService
     
@@ -21,6 +20,25 @@ final class TaskListInteractor {
     ) {
         self.coreDataService = coreDataService
         self.networkService = networkService
+        setupNotifications()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    // MARK: - Private
+    private func setupNotifications() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleTaskDidChange),
+            name: .taskDidChange,
+            object: nil
+        )
+    }
+    
+    @objc private func handleTaskDidChange() {
+        fetchFromCoreData()
     }
 }
 

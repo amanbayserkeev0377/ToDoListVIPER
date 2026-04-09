@@ -27,6 +27,8 @@ extension TaskDetailInteractor: TaskDetailInteractorProtocol {
             guard let self else { return }
             if let error {
                 self.output?.didFailWithError(error)
+            } else {
+                NotificationCenter.default.post(name: .taskDidChange, object: nil)
             }
         }
     }
@@ -40,7 +42,13 @@ extension TaskDetailInteractor: TaskDetailInteractorProtocol {
             guard let self else { return }
             if let error {
                 self.output?.didFailWithError(error)
+            } else {
+                NotificationCenter.default.post(name: .taskDidChange, object: nil)
             }
         }
     }
+}
+
+extension Notification.Name {
+    static let taskDidChange = Notification.Name("taskDidChange")
 }
